@@ -1,10 +1,10 @@
+var personHardHatTimestamps = [];
+var personHighVisibilityVestTimestamps = [];
+var personHardHatHighVisibilityVestTimestamps = [];
+
 function myFunction() {
 
   var count;
-
-  var personHardHatTimestamps = ['1985-09-25 17:45:30.005', '1985-09-25 17:45:30.005', '1985-09-25 17:45:30.005'];
-  var personHighVisibilityVestTimestamps = ['1985-09-25 17:45:30.005', '1985-09-25 17:45:30.005', '1985-09-25 17:45:30.005'];
-  var personHardHatHighVisibilityVestTimestamps = ['1985-09-25 17:45:30.005', '1985-09-25 17:45:30.005', '1985-09-25 17:45:30.005'];
 
   var table = document.getElementById("myTable");
 
@@ -18,5 +18,33 @@ function myFunction() {
     cell2.innerHTML = personHighVisibilityVestTimestamps[count];
     cell3.innerHTML = personHardHatHighVisibilityVestTimestamps[count];
   }
+}
+
+function result(arr) {
+  var count;
+  for (count = 0; count < arr.length; count++) {
+    // Change attribute names here
+    personHardHatTimestamps.push(arr[count].userId)
+    personHighVisibilityVestTimestamps.push(arr[count].title)
+    personHardHatHighVisibilityVestTimestamps.push(arr[count].body)
+  }
+
+  myFunction();
+}
+
+function myRequest(){
+
+  var xmlhttp = new XMLHttpRequest();
+  // Endpoint URL
+  var url = "https://jsonplaceholder.typicode.com/posts";
+
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var obj = JSON.parse(this.responseText);
+      result(obj);
+    }
+  };
+  xmlhttp.open("GET", url, true);
+  xmlhttp.send();
 
 }
