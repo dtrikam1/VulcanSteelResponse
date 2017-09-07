@@ -18,7 +18,10 @@ function myFunction() {
     var cell4 = row.insertCell(3);
 
     //show all time stamps
-    cell1.innerHTML = timeStamps[count];
+
+    if (timeStamps[count] != null) {
+      cell1.innerHTML = timeStamps[count];
+    }
 
     if (personHardHatHighVisibilityVestDetected[count] == "X") {
       cell4.innerHTML = "&#9989";
